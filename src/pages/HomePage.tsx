@@ -8,17 +8,44 @@ interface HomePageProps {
 
 const HomePage: React.FC<HomePageProps> = ({ onNext }) => {
   const [showContent, setShowContent] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
 
   useEffect(() => {
+    // Show welcome message immediately
+    setShowWelcome(true);
+    
+    // Show main content after fireworks start
     const timer = setTimeout(() => {
       setShowContent(true);
-    }, 500);
+    }, 2000);
 
-    return () => clearTimeout(timer);
+    // Hide welcome message after fireworks
+    const welcomeTimer = setTimeout(() => {
+      setShowWelcome(false);
+    }, 6500);
+
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(welcomeTimer);
+    };
   }, []);
 
   return (
     <section className="min-h-screen flex items-center justify-center px-6 relative">
+      {/* Welcome overlay during fireworks */}
+      {showWelcome && (
+        <div className="fixed inset-0 bg-gradient-to-br from-purple-900/90 via-pink-900/90 to-indigo-900/90 flex items-center justify-center z-40">
+          <div className="text-center">
+            <h1 className="text-7xl md:text-9xl font-bold mb-8 bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 bg-clip-text text-transparent animate-pulse">
+              🎆 SURPRISE! 🎆
+            </h1>
+            <p className="text-3xl md:text-4xl text-white font-semibold animate-bounce">
+              Get ready for something special...
+            </p>
+          </div>
+        </div>
+      )}
+      
       <div className={`text-center max-w-4xl mx-auto transition-all duration-2000 ${
         showContent ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-10'
       }`}>

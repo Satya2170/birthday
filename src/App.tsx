@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ConfettiAnimation from './components/ConfettiAnimation';
+import FireworksAnimation from './components/FireworksAnimation';
 import BackgroundMusic from './components/BackgroundMusic';
 import PhotoGallery from './components/PhotoGallery';
 import WishesSection from './components/WishesSection';
@@ -40,6 +41,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100">
+      <FireworksAnimation />
       <ConfettiAnimation />
       <FloatingElements />
       <BackgroundMusic />
